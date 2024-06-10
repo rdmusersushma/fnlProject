@@ -1,0 +1,17 @@
+{% extends "teacher/base.html" %}
+{% block content %}     
+        {% for inf in info %}
+		<article class="media content-section">
+			<div class = "media-body">
+				<div class = "article-metadata">
+					<a class="mr-2" href="#">{{ inf.first_name }}</a>
+					<a class="mr-2" href="#">{{ inf.last_name }}</a>
+					<small class="text-muted">{{ inf.email }} </small>
+				</div>
+				<h2> <a class="article-title" href ="#" >{{ inf.department }} </a></h2>
+				<p class = "article-content">{{ inf.date_of_birth }} </p>
+			</div>
+		</article>
+	{% endfor %}   
+{% endblock content %}
+
