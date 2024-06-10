@@ -129,7 +129,7 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap4'
 
 LOGIN_URL = 'login'
 
-MEDIA_ROOT = as.path.join(BASE_DIR, 'media')
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 # Default primary key field type
