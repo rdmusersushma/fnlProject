@@ -13,7 +13,7 @@
         {% if title %}
                 <title> Educonnect - {{ title }} </title>
         {% else %}
-                <title>Educonnect - Create-Account-Here</title>
+                <title>Educonnect - Teacher_dashboard</title>
         {% endif %}
 <style>
 body {
@@ -82,7 +82,7 @@ a.article-title:hover {
 	<header class="site-header">
       <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
         <div class="container">
-          <a class="navbar-brand mr-4" href="#">CREATE-ACCOUNT</a>
+          <a class="navbar-brand mr-4" href="#">Teacher_dashboard</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
           </button>
@@ -92,7 +92,15 @@ a.article-title:hover {
               <a class="nav-item nav-link" href="#">About</a>
             </div>
             <!-- Navbar Right Side -->
-            
+            <div class="navbar-nav">
+		{% if user.is_authenticated %}
+			<a class="nav-item nav-link" href="#">Profile </a>
+			<a class="nav-item nav-link" href="#">Logout</a>
+		{% else %}
+			<a class="nav-item nav-link" href="#">Login</a>
+             	        <a class="nav-item nav-link" href="#">Register</a>
+		{% endif %}
+            </div>
           </div>
         </div>
       </nav>

@@ -10,24 +10,24 @@ def register(request):
     if request.method == "GET":
         form = UserRegistrationForm()
         return render(request, 'account/register.html', {'form': form})
-    elif request.method == "POST":
+    if request.method == "POST":
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
             user = form.save()
             messages.success(request, "Successfully registered")
-            login(user)
+          #  login(user)
             if user.is_student:
-                return redirect('/student/register')
+                return redirect('s-register')
             else:
-                return redirect('/teacher/register')
+                return redirect('t-register')
             return redirect('/')
-    return redirect('/account/register')
+    return redirect('register')
 
 def login(request):
     if request.method == "GET":
         form = UserLoginForm()
         return render(request, "account/login.html", {'form': form})
-    elif request.method == "POST":
+    if request.method == "POST":
         form = UserLoginForm(request.POST)
         if form.is_valid():
             username = form.cleaned_data['username']
@@ -37,7 +37,7 @@ def login(request):
                 auth.login(request, user)
                 messages.success(request, f"Hi, {username}, logged in Successfully")
                 if user.is_student:
-                    return redirect("student/profile")
+                    return redirect("s-profile")
                 else:
-                    return redirect("teacher/profile")
-    return redirect("account/login")
+                    return redirect("t-profile")
+    return redirect("login")

@@ -13,16 +13,16 @@ def shome(request):
 def register(request):
     if request.method == "GET":
         form = StudentRegistrationForm()
-        return render(request, 'student/register.html', {'form': form})
+        return render(request, 'student/sregister.html', {'form': form})
     elif request.method == "POST":
         form = StudentRegistrationForm(request.POST)
         if form.is_valid():
             form.instance.user_id = request.user
             form.save()
-            messages.success("successfully completed the user profile creation")
-            return redirect("account/login")
+            messages.success(request,"successfully completed the user profile creation")
+            return redirect("login")
     # if registering failed
-    return redirect('student/register')
+    return redirect('s-register')
 
 
 

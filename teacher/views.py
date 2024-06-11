@@ -11,15 +11,15 @@ def thome(request):
 def register(request):
     if request.method == "GET":
         form = TeacherRegistrationForm()
-        return render(request, 'teacher/register.html', {'form': form})
-    elif requset.method == "POST":
+        return render(request, 'teacher/tregister.html', {'form': form})
+    elif request.method == "POST":
         form = TeacherRegistrationForm(request.POST)
         if form.is_valid():
             form.save()
             messages.success("successfully completed the user profile creation")
-            return redirect("account/login")
+            return redirect("login")
     # if registering failed
-    return redirect('teacher/register')
+    return redirect('t-register')
 	
 
 def tlogin(request):
