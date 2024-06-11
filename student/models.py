@@ -1,12 +1,12 @@
 from django.db import models
-from django.contrib.auth.models import User
+from account.models import CustomUser
+from django.utils import timezone
 
-# class Profile(models.Model):
-#	user = models.OneToOneField(User, on_delete = models.CASCADE)
-#	image = models.ImageField(default='default.jpg', upload_to='profile_pics')
-#	
-#	def __str__(self):
-#		return f'{self.username} Profile'
-# Create your models here.
-
-# pip install Pillow
+class StudentProfile(models.Model):
+    additional_notes = models.TextField(blank=True,null=True)
+    reg_no = models.CharField(max_length=10, primary_key=True)
+    date_posted = models.DateTimeField(default=timezone.now)
+    user_id = models.ForeignKey(CustomUser, on_delete = models.CASCADE)
+ 
+    def __str__(self):
+        return f"{self.user_id.username}{self.reg_no}"

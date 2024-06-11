@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from student.forms import StudentRegistrationForm
 
 from . import urls
 
@@ -8,7 +9,21 @@ def shome(request):
 	return render(request, 'student/student_dashboard.html')
 	
 
-def sregister(request):
+def register(request):
+    if request.method == "GET":
+        form = StudentRegistrationForm()
+        return render(request, 'student/register.html', {'form': form})
+    elif request.method == "POST":
+        form = StudentRegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success("successfully completed the user profile creation")
+            return redirect("account/login")
+    # if registering failed
+    return redirect('student/register')
+
+
+
 #	if request.method = 'POST':
 #		from = UserRegisterForm(request.POST)
 #		if form.is_valid():
@@ -18,7 +33,6 @@ def sregister(request):
 #			return redirect('login')
 #	else:
 #		from = UserRegisterForm()
-	return render(request, 'student/sregister.html')
 	
 
 def slogin(request):
