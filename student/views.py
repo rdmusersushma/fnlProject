@@ -9,6 +9,7 @@ def shome(request):
 	return render(request, 'student/student_dashboard.html')
 	
 
+@login_required
 def register(request):
     if request.method == "GET":
         form = StudentRegistrationForm()
@@ -16,6 +17,7 @@ def register(request):
     elif request.method == "POST":
         form = StudentRegistrationForm(request.POST)
         if form.is_valid():
+            form.instance.user_id = request.user
             form.save()
             messages.success("successfully completed the user profile creation")
             return redirect("account/login")
