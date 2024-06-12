@@ -1,13 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from teacher.forms import TeacherRegistrationForm
-from . import urls
 
 def thome(request):
 	return render(request, 'teacher/teacher_dashboard.html')
 	
 
+@login_required
 def register(request):
     if request.method == "GET":
         form = TeacherRegistrationForm()
@@ -15,8 +15,9 @@ def register(request):
     elif request.method == "POST":
         form = TeacherRegistrationForm(request.POST)
         if form.is_valid():
+            form.instance.user_id = request.user
             form.save()
-            messages.success("successfully completed the user profile creation")
+            messages.success(request, "successfully completed the user profile creation")
             return redirect("login")
     # if registering failed
     return redirect('t-register')
