@@ -15,7 +15,7 @@ def register(request):
         if form.is_valid():
             user = form.save()
             messages.success(request, "Successfully registered")
-          #  login(user)
+    #        login(user)
             if user.is_student:
                 return redirect('s-register')
             else:

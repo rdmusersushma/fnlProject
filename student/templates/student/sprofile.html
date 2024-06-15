@@ -3,14 +3,15 @@
 {% block content %}
 	<div class="content-section">
 	<div class="media">
-		<img class="rounded-circle account-img" src="userimage.jpg">
-		<div class="media-body">
-			<h2 class="account-heading">Username</h2>
-			<p class="text-secondary">username@gmail.com</p>
-		</div>
+	<img class="rounded-circle account-img"  src="{{ user.profile_picture.url }}"
+		width="100"
+		height="100">
+	<div class="media-body">
+	<h2 class="account-heading">{{ user.username }} </h2>
+	<p class="text-secondary"> {{ user.email }} </p>
 	</div>
-	
-	<!-- FROM HERE -->
+	</div>
+	<!-- from Here -->
 	</div>
 	
 {% endblock content %}

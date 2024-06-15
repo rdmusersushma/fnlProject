@@ -14,6 +14,7 @@ class UserRegistrationForm(UserCreationForm):
                 'password1',
                 'password2',
                 'email',
+		'profile_picture',
                 "contact_number",
                 "address",
                 "bio",

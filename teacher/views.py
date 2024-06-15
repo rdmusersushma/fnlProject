@@ -2,10 +2,12 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from teacher.forms import TeacherRegistrationForm
-
+from account.models import CustomUser
 def thome(request):
-	return render(request, 'teacher/teacher_dashboard.html')
-	
+	context ={
+		'users':CustomUser.objects.all()
+		}
+	return render(request, 'teacher/teacher_dashboard.html',context)
 
 @login_required
 def register(request):

@@ -8,7 +8,7 @@ from django.utils import timezone
 class CustomUser(AbstractUser):
     bio = models.TextField(max_length=100, blank=True)
     is_student = models.BooleanField(default=False)
-    profile_picture = models.ImageField(upload_to='profile_pictures/',blank=True,null=True)
+    profile_picture = models.ImageField(default='default.jpg',upload_to='profile_pictures/',blank=True,null=True)
     address = models.TextField(null=True)
     contact_number = models.CharField(max_length=20,default='No contact number provided')
     GENDER_CHOICES =[

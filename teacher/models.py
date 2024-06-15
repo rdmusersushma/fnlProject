@@ -14,4 +14,4 @@ class TeacherProfile(models.Model):
     user_id = models.ForeignKey(CustomUser, on_delete = models.CASCADE)
  
     def __str__(self):
-        return self.title
+        return f'{self.user_id.username} Profile'
