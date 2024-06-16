@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from teacher.forms import TeacherRegistrationForm
+from .forms import TeacherRegistrationForm, TeacherProfileUpdateForm
+from account.forms import  UserUpdateForm
 from account.models import CustomUser
 def thome(request):
 	context ={
@@ -30,6 +31,36 @@ def tlogin(request):
 	
 @login_required
 def tprofile(request):
-	return render(request, 'teacher/tprofile.html')
-	
+	if request.method == 'POST':
+		user_profile = request.user.teacherprofile  # Assuming you have a OneToOne relation
+		form = TeacherProfileUpdateForm(request.POST, instance=user_profile)  # Pre-populate with current data
+		if form.is_valid():
+			form.save()
+			# Success message or redirect to profile page (optional)
+			return redirect('t-profile')  # Replace with your profile URL name
+		else:
+			pass
+
+	else:
+		user_profile = request.user.teacherprofile
+		form = TeacherProfileUpdateForm(instance=user_profile)  # Pre-populate with current data
+	context = {'form': form}
+
+	return render(request, 'teacher/tprofile.html', context)
+
+
+#def update_profile(request):
+#    if request.method == 'POST':
+#        user_profile = request.user.TeacherProfile  # Assuming you have a OneToOne relation
+#        form = TeacherProfileUpdateForm(request.POST, instance=user_profile)  # Pre-populate with current data
+#        if form.is_valid():
+#            form.save()
+#            # Success message or redirect to profile page (optional)
+#            return redirect('t-profile')  # Replace with your profile URL name
+#    else:
+#        user_profile = request.user.teacherprofile
+#        form = TeacherProfileUpdateForm(instance=user_profile)  # Pre-populate with current data
+#
+#    context = {'form': form}
+#    return render(request, 'update_profile.html', context)	
 # Create your views here.
